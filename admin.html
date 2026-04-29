@@ -4,219 +4,555 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, interactive-widget=overlays-content">
     <meta name="theme-color" id="theme-color-meta" content="#064e3b">
-    <title>لوحة الإدارة | السوق وياك</title>
+    <title>إدارة الإعلانات | السوق وياك</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { navy: '#0f172a', darkbg: '#1e293b', brand: '#10b981' }, fontFamily: { sans:['Cairo', 'sans-serif'] }, screens: { 'xs': '400px' }, zIndex: { '60': '60', '70': '70', '100': '100' } } } }
+        tailwind.config = { darkMode: 'class', theme: { extend: { colors: { navy: '#0f172a', darkbg: '#1e293b', brand: '#10b981' }, fontFamily: { sans:['Cairo', 'sans-serif'] }, screens: { 'xs': '400px' } } } }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        html { background-color: #cbd5e1; } .dark html { background-color: #0f172a; } body { font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; background-color: transparent; } .no-scrollbar::-webkit-scrollbar { display: none; } .select-none { user-select: none; } .modal-overlay { position: fixed; inset: 0; z-index: 100; background-color: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; padding: 1rem; } .mobile-full-modal { position: relative; width: 100%; max-width: 32rem; background-color: #ffffff; display: flex; flex-direction: column; max-height: 90vh; height: auto; border-radius: 1.5rem; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); } @media (max-width: 767px) { .mobile-full-modal { height: 100dvh; max-height: 100dvh; border-radius: 0; } .modal-overlay { padding: 0; } } .dark .mobile-full-modal { background-color: #1e293b; } .sticky-header { z-index: 40; background-color: #064e3b; border-bottom-left-radius: 1.5rem; border-bottom-right-radius: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); } .dark .sticky-header { background-color: #1e293b; border-bottom: 1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 10px rgba(0,0,0,0.4); } .sticky-search-bar { position: sticky; top: 3.5rem; z-index: 30; margin: 0 0 0.5rem 0; padding: 0.25rem; border-radius: 0.75rem; background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: none; } .dark .sticky-search-bar { background: #1e293b; border-color: #334155; } #bottom-nav { z-index: 40; } .input-box { width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.4rem 0.6rem; font-size: 0.75rem; font-weight: 700; outline: none; color: #0f172a; transition: none; } .dark .input-box { background: #0f172a; border-color: #334155; color: white; } .custom-select { appearance: none; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 0.4rem; padding: 0.35rem 1.5rem 0.35rem 0.5rem; width: 100%; font-weight: 700; font-size: 0.75rem; color: #334155; cursor: pointer; transition: all 0.1s; } .dark .custom-select { background-color: #0f172a; color: white; border-color: #334155; } .custom-select-wrapper { position: relative; } .custom-select-icon { position: absolute; left: 0.5rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #64748b; width: 0.8rem; height: 0.8rem; } .modern-table { border-collapse: collapse; width: 100%; } .modern-table td, .modern-table th { padding: 0.4rem; border-bottom: 1px solid #e2e8f0; } .dark .modern-table td, .dark .modern-table th { border-color: #334155; } .amenity-tile input:checked + div { background-color: #10b981; color: white; border-color: #10b981; } #filter-panel { display: none; opacity: 0; transform: scaleY(0.95); transform-origin: top; } #filter-panel.open { display: block; opacity: 1; transform: scaleY(1); } .toast { animation: slideInDown 0.2s ease-out forwards; } .toast.hiding { animation: fadeOut 0.2s ease-in forwards; } @keyframes popIn { from { transform: scale(0.98); opacity: 0; } to { transform: scale(1); opacity: 1; } } .animate-pop { animation: popIn 0.08s ease-out forwards; }
+        html { background-color: #f1f5f9; } .dark html { background-color: #0f172a; } body { font-family: 'Cairo', sans-serif; -webkit-tap-highlight-color: transparent; } 
+        .no-scrollbar::-webkit-scrollbar { display: none; } .select-none { user-select: none; } 
+        .sticky-header { z-index: 40; background-color: #064e3b; box-shadow: 0 4px 10px rgba(0,0,0,0.15); } 
+        .dark .sticky-header { background-color: #1e293b; border-bottom: 1px solid rgba(255,255,255,0.05); } 
+        .input-box { width: 100%; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 0.5rem; padding: 0.4rem 0.6rem; font-size: 0.75rem; font-weight: 700; outline: none; color: #0f172a; } 
+        .dark .input-box { background: #0f172a; border-color: #334155; color: white; } 
+        .custom-select { appearance: none; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 0.4rem; padding: 0.35rem 1.5rem 0.35rem 0.5rem; width: 100%; font-weight: 700; font-size: 0.75rem; color: #334155; cursor: pointer; } 
+        .dark .custom-select { background-color: #0f172a; color: white; border-color: #334155; } 
+        .custom-select-wrapper { position: relative; } 
+        .custom-select-icon { position: absolute; left: 0.5rem; top: 50%; transform: translateY(-50%); pointer-events: none; color: #64748b; width: 0.8rem; height: 0.8rem; } 
+        .amenity-tile input:checked + div { background-color: #10b981; color: white; border-color: #10b981; } 
+        .toast { animation: slideInDown 0.2s ease-out forwards; } .toast.hiding { animation: fadeOut 0.2s ease-in forwards; } 
+        @keyframes slideInDown { from { transform: translate(-50%, -100%); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+        @keyframes fadeOut { to { opacity: 0; transform: translate(-50%, -20px); } }
+        
+        /* أنيميشن القوائم المنسدلة */
+        .accordion-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        .accordion-content.open { grid-template-rows: 1fr; }
+        .accordion-inner { overflow: hidden; }
+        
+        /* شاشة تسجيل الدخول */
+        .auth-overlay { position: fixed; inset: 0; z-index: 100; background-color: #0f172a; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+
+        /* تأثير القائمة المنسدلة المخصصة */
+        .dropdown-menu { transform-origin: top; transform: scaleY(0.95); opacity: 0; transition: all 0.15s ease; pointer-events: none; }
+        .dropdown-menu.show { transform: scaleY(1); opacity: 1; pointer-events: auto; }
     </style>
 </head>
 <body class="text-slate-800 dark:text-slate-100 select-none hidden" id="admin-body">
 
-    <div id="app-content-wrapper">
-        <div id="toast-container" class="fixed top-4 left-0 right-0 z-[10000] flex flex-col items-center gap-2 pointer-events-none px-4"></div>
+    <div id="toast-container" class="fixed top-4 left-1/2 -translate-x-1/2 z-[10000] flex flex-col items-center gap-2 pointer-events-none w-full px-4"></div>
 
-        <header class="fixed top-0 w-full sticky-header flex items-center justify-between px-4 h-14">
+    <header class="fixed top-0 w-full sticky-header flex items-center justify-between px-4 h-14">
+        <div class="flex items-center gap-3">
             <div class="flex flex-col justify-center">
-                <span class="text-[9px] font-bold text-red-300 leading-none">لوحة تحكم الإدارة</span>
+                <span class="text-[9px] font-bold text-red-300 leading-none">إدارة الإعلانات</span>
                 <span class="text-[13px] font-black text-white leading-tight">السوق <span class="text-yellow-400">وياك</span></span>
             </div>
-            <div class="flex gap-2 items-center">
-                <button onclick="toggleDarkMode()" class="p-1.5 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all duration-100"><i data-lucide="moon" class="w-3.5 h-3.5 block dark:hidden"></i><i data-lucide="sun" class="w-3.5 h-3.5 hidden dark:block text-yellow-300"></i></button>
-                <button onclick="logoutAdmin()" class="p-1.5 rounded-full bg-red-500/80 text-white hover:bg-red-500 transition-all duration-100"><i data-lucide="log-out" class="w-4 h-4"></i></button>
-            </div>
-        </header>
+        </div>
+        <div class="flex gap-2 items-center">
+            <button onclick="toggleAddForm()" class="px-3 py-1.5 rounded-lg bg-emerald-500 text-white text-[10px] font-bold hover:bg-emerald-600 transition-all flex items-center gap-1"><i data-lucide="plus" class="w-3 h-3"></i> إضافة عقار</button>
+            <button onclick="toggleDarkMode()" class="p-1.5 rounded-full bg-white/20 text-white hover:bg-white/30 transition-all"><i data-lucide="moon" class="w-3.5 h-3.5 block dark:hidden"></i><i data-lucide="sun" class="w-3.5 h-3.5 hidden dark:block text-yellow-300"></i></button>
+            <button onclick="logoutAdmin()" class="p-1.5 rounded-full bg-red-500/80 text-white hover:bg-red-500 transition-all"><i data-lucide="log-out" class="w-4 h-4"></i></button>
+        </div>
+    </header>
 
-        <main class="pt-[4rem] pb-24 container mx-auto px-3 max-w-5xl min-h-screen">
-            <div id="home-view" class="block w-full"> 
-                <div class="mb-6 mt-1"><div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="categories-grid"></div></div>
-                <div id="reviews-section" class="mb-8">
-                    <div class="flex justify-center mb-3"><div class="bg-white dark:bg-slate-800 text-red-600 dark:text-red-400 border border-slate-200 dark:border-slate-700 shadow-sm px-8 py-1.5 rounded-full text-[11px] font-black tracking-widest select-none">إدارة التقييمات</div></div>
-                    <div class="bg-slate-100 dark:bg-slate-800 rounded-2xl p-3 shadow-sm border border-slate-200 dark:border-slate-700">
-                        <div id="reviews-container" class="space-y-2.5 min-h-[120px]"></div>
+    <main class="pt-[4.5rem] pb-10 container mx-auto px-2 max-w-3xl min-h-screen">
+        
+        <!-- نموذج الإضافة والتعديل المدمج -->
+        <div id="inline-form-container" class="accordion-content">
+            <div class="accordion-inner">
+                <div class="mb-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-emerald-500 dark:border-emerald-600 p-3">
+                    <div class="flex justify-between items-center mb-3 border-b border-slate-100 dark:border-slate-700 pb-2">
+                        <h3 id="form-title" class="font-bold text-emerald-600 dark:text-emerald-400 text-xs flex items-center gap-1"><i data-lucide="edit-3" class="w-4 h-4"></i> إضافة إعلان جديد</h3>
+                        <button onclick="toggleAddForm()" class="text-slate-400 hover:text-red-500"><i data-lucide="x" class="w-4 h-4"></i></button>
                     </div>
-                </div>
-            </div>
+                    
+                    <div class="space-y-3">
+                        <!-- الصور -->
+                        <div>
+                            <label class="block text-[9px] font-bold text-slate-500 mb-1">الصور (بحد أقصى 10)</label>
+                            <div class="flex gap-2 items-center">
+                                <label class="w-12 h-12 shrink-0 border-2 border-dashed border-emerald-300 bg-emerald-50 dark:bg-slate-900 rounded-lg flex flex-col items-center justify-center cursor-pointer text-emerald-600 relative">
+                                    <input type="file" id="file-upload-input" multiple accept="image/*,video/*" onchange="handleUpload(this)" class="absolute inset-0 opacity-0 z-10">
+                                    <i data-lucide="camera" class="w-4 h-4"></i>
+                                </label>
+                                <div id="preview-area" class="flex-1 flex gap-1 overflow-x-auto no-scrollbar"></div>
+                            </div>
+                        </div>
 
-            <div id="listings-view" class="hidden w-full flex-col min-h-screen mt-2">
-                <div class="flex items-center gap-2 mb-3 bg-white dark:bg-slate-800 p-2 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-                    <button onclick="window.history.back()" class="bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-white p-1.5 rounded-full border border-slate-200 dark:border-slate-700 hover:bg-slate-200 transition-all duration-100"><i data-lucide="arrow-right" class="w-4 h-4"></i></button>
-                    <h2 id="listings-view-title" class="text-xs font-black text-emerald-600 dark:text-emerald-400"></h2>
-                </div>
-                <div class="sticky-search-bar !top-[4rem] !mb-4">
-                    <div class="relative w-full">
-                        <input type="text" id="search-input" placeholder="ابحث داخل القسم (كود، عنوان)..." class="w-full bg-transparent border-none rounded-lg pl-10 pr-9 py-1 text-xs outline-none dark:text-white font-bold h-9">
-                        <button onclick="performSearch(false)" class="absolute right-1 top-0 h-full w-9 flex items-center justify-center text-slate-500 hover:text-emerald-600 transition-all"><i data-lucide="search" class="w-4 h-4"></i></button>
+                        <!-- البيانات الأساسية -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="custom-select-wrapper">
+                                <select id="in-category" onchange="updateFormFields()" class="custom-select">
+                                    <option value="apartment">شقة</option><option value="villa">فيلا</option><option value="chalet">شاليهات</option><option value="office">مكتب</option><option value="shop">محلات</option><option value="land">أراضي</option><option value="building">عماير</option><option value="warehouse">مخازن</option>
+                                </select>
+                                <i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i>
+                            </div>
+                            <div class="custom-select-wrapper">
+                                <select id="in-type" class="custom-select"><option value="sale">بيع</option><option value="rent">إيجار</option></select>
+                                <i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i>
+                            </div>
+                            <input id="in-title" class="input-box col-span-2" placeholder="عنوان الإعلان">
+                            <input id="in-price" type="number" class="input-box" placeholder="السعر (جنيه)">
+                            <input id="in-area" type="number" class="input-box" placeholder="المساحة (م²)">
+                            
+                            <input id="in-level" type="text" class="input-box" placeholder="الدور">
+                            <input id="in-floors-alt" type="number" class="input-box hidden" placeholder="عدد الأدوار">
+                            
+                            <div id="land-type-wrapper" class="hidden custom-select-wrapper">
+                                <select id="in-land-type" class="custom-select"><option value="building">مباني</option><option value="agriculture">زراعية</option></select>
+                                <i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i>
+                            </div>
+                        </div>
+
+                        <div id="land-fields" class="hidden grid grid-cols-2 gap-2">
+                            <input id="in-feddan" type="number" class="input-box" placeholder="فدان (اختياري)">
+                            <input id="in-qirat" type="number" class="input-box" placeholder="قيراط (اختياري)">
+                        </div>
+                        <div id="building-fields" class="hidden grid grid-cols-2 gap-2">
+                            <input id="in-apartments" type="number" class="input-box" placeholder="عدد الشقق">
+                        </div>
+                        <div id="room-fields" class="grid grid-cols-2 gap-2">
+                            <input id="in-rooms" type="number" class="input-box" placeholder="عدد الغرف">
+                            <input id="in-baths" type="number" class="input-box" placeholder="عدد الحمامات">
+                        </div>
+                        <div id="extra-fields" class="grid grid-cols-2 gap-2">
+                            <input id="in-balconies" type="number" class="input-box" placeholder="عدد البلكونات">
+                            <div class="custom-select-wrapper">
+                                <select id="in-finishing" class="custom-select"><option value="" disabled selected>نوع التشطيب</option><option value="red">طوب أحمر</option><option value="semi">نصف تشطيب</option><option value="full">تشطيب كامل</option><option value="super">سوبر لوكس</option><option value="ultra">الترا سوبر لوكس</option></select>
+                                <i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i>
+                            </div>
+                        </div>
+
+                        <div id="furnished-field" class="flex items-center justify-between bg-slate-50 dark:bg-slate-900 p-2 rounded-lg border border-slate-200 dark:border-slate-700">
+                            <span class="text-[9px] font-bold text-slate-600 dark:text-slate-300">مفروش؟</span>
+                            <div class="flex gap-1">
+                                <label class="cursor-pointer"><input type="radio" name="furnished" id="furn-yes" value="yes" class="peer hidden"><span class="px-3 py-0.5 rounded text-[9px] font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 peer-checked:bg-emerald-500 peer-checked:text-white transition-all">نعم</span></label>
+                                <label class="cursor-pointer"><input type="radio" name="furnished" id="furn-no" value="no" checked class="peer hidden"><span class="px-3 py-0.5 rounded text-[9px] font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 peer-checked:bg-slate-800 peer-checked:text-white transition-all">لا</span></label>
+                            </div>
+                        </div>
+
+                        <!-- الموقع والتفاصيل -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="custom-select-wrapper">
+                                <select id="in-gov" onchange="populateCities('in-gov', 'in-city')" class="custom-select"><option value="" disabled selected>المحافظة</option></select>
+                                <i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i>
+                            </div>
+                            <div class="custom-select-wrapper">
+                                <select id="in-city" class="custom-select"><option value="" disabled selected>المدينة</option></select>
+                                <i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i>
+                            </div>
+                            <input id="in-address" class="input-box col-span-2" placeholder="العنوان التفصيلي">
+                            <input id="in-phone" type="tel" class="input-box col-span-2" placeholder="رقم الهاتف">
+                        </div>
+
+                        <div>
+                            <span class="block text-[9px] font-bold text-slate-500 mb-1">المميزات</span>
+                            <div class="grid grid-cols-3 xs:grid-cols-4 gap-1.5" id="amenities-grid"></div>
+                        </div>
+                        
+                        <textarea id="in-desc" rows="2" class="input-box resize-none text-[10px]" placeholder="وصف تفصيلي..."></textarea>
+
+                        <button onclick="submitListing()" id="btn-publish" class="w-full bg-emerald-600 text-white py-2 rounded-lg font-bold text-xs shadow-md active:scale-95 transition-all">حفظ الإعلان</button>
                     </div>
-                </div>
-                <div id="grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-2"></div>
-            </div>
-        </main>
-
-        <nav id="bottom-nav" class="fixed bottom-4 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-6 py-2.5 rounded-full flex items-center gap-8 shadow-xl z-50">
-            <button onclick="openHome(false)" class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 group"><i data-lucide="home" class="w-5 h-5"></i><span class="text-[8px] font-bold mt-0.5">الرئيسية</span></button>
-            <button onclick="openAddModal()" class="w-12 h-12 bg-red-600 text-white border-[3px] border-white dark:border-slate-700 rounded-full flex items-center justify-center shadow-lg transform -translate-y-5 hover:scale-110"><i data-lucide="plus" class="w-6 h-6"></i></button>
-            <button onclick="toggleAdminPanel()" class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 group relative"><i data-lucide="message-square" class="w-5 h-5"></i><span class="text-[8px] font-bold mt-0.5">رسائل العملاء</span></button>
-        </nav>
-
-        <!-- Admin Login Modal (Persistent if not logged in) -->
-        <div id="auth-modal" class="hidden modal-overlay !bg-slate-900 !p-0 z-[150]">
-            <div class="w-full max-w-sm mx-auto bg-slate-800 rounded-2xl shadow-xl border border-slate-700 p-6 animate-pop">
-                <div class="flex justify-center mb-4"><div class="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center border-2 border-red-500 shadow-lg"><i data-lucide="shield" class="w-8 h-8 text-red-500"></i></div></div>
-                <h2 class="text-center text-white font-bold mb-4">تسجيل دخول الإدارة</h2>
-                <div class="space-y-3">
-                    <div class="relative"><span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs bg-slate-900 px-1.5 rounded">+20</span><input id="login-phone" type="tel" class="input-box pl-12 text-left" placeholder="رقم هاتف الإدارة"></div>
-                    <input id="login-pass" type="password" class="input-box" placeholder="كلمة المرور">
-                    <button id="btn-login" onclick="loginAdmin()" class="w-full bg-red-600 text-white py-2.5 rounded-xl font-bold text-xs shadow-md hover:bg-red-700 mt-2">تسجيل الدخول</button>
                 </div>
             </div>
         </div>
 
-        <div id="delete-modal" class="hidden modal-overlay" style="z-index: 150;"><div class="relative w-full max-w-xs bg-white dark:bg-slate-800 rounded-2xl p-6 text-center animate-pop"><div class="w-16 h-16 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-red-100 dark:border-red-800/50"><i data-lucide="trash-2" class="w-8 h-8"></i></div><h3 class="text-lg font-black text-slate-800 dark:text-white mb-2">حذف الإعلان</h3><p class="text-xs text-slate-500 mb-6">تأكيد الحذف نهائياً؟</p><div class="flex gap-2"><button onclick="confirmDelete()" id="btn-confirm-delete" class="flex-1 bg-red-500 text-white py-2 rounded-xl font-bold">نعم، حذف</button><button onclick="toggleModal('delete-modal')" class="flex-1 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-white py-2 rounded-xl font-bold border dark:border-slate-700">إلغاء</button></div></div></div>
+        <!-- شريط البحث والفلترة -->
+        <div class="flex gap-2 mb-3 sticky top-[4rem] z-30 bg-[#f1f5f9] dark:bg-[#0f172a] py-1">
+            <div class="relative flex-1">
+                <input type="text" id="search-input" onkeyup="performSearch()" placeholder="بحث بالاسم أو الكود..." class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg pl-8 pr-2 py-1.5 text-[10px] outline-none dark:text-white font-bold h-8 shadow-sm transition-none">
+                <i data-lucide="search" class="absolute left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400"></i>
+            </div>
+            
+            <div class="relative w-28 shrink-0" id="custom-filter-container">
+                <button onclick="toggleFilterMenu(event)" class="w-full h-8 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2 flex items-center justify-between shadow-sm text-[10px] font-bold text-slate-700 dark:text-slate-200">
+                    <span id="active-filter-text">كل الأقسام</span>
+                    <i data-lucide="filter" class="w-3 h-3 text-slate-400"></i>
+                </button>
+                <div id="filter-dropdown" class="dropdown-menu absolute top-full mt-1 right-0 w-32 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-50 flex flex-col overflow-hidden">
+                    <button onclick="selectFilter('', 'كل الأقسام')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">كل الأقسام</button>
+                    <button onclick="selectFilter('apartment', 'شقق')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">شقق</button>
+                    <button onclick="selectFilter('villa', 'فلل')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">فلل</button>
+                    <button onclick="selectFilter('chalet', 'شاليهات')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">شاليهات</button>
+                    <button onclick="selectFilter('office', 'مكاتب')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">مكاتب</button>
+                    <button onclick="selectFilter('shop', 'محلات')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">محلات</button>
+                    <button onclick="selectFilter('land', 'أراضي')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">أراضي</button>
+                    <button onclick="selectFilter('building', 'عماير')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700">عماير</button>
+                    <button onclick="selectFilter('warehouse', 'مخازن')" class="text-right px-3 py-2 text-[10px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700">مخازن</button>
+                </div>
+            </div>
+        </div>
 
-        <!-- Add/Edit Modal -->
-        <div id="add-modal" class="hidden modal-overlay"><div class="mobile-full-modal animate-pop"><div class="p-2.5 border-b border-slate-200 dark:border-slate-700 flex justify-between items-center bg-white dark:bg-slate-800 shrink-0"><h3 id="add-modal-title" class="font-bold text-slate-800 dark:text-white text-sm">إضافة عقار</h3><button onclick="toggleModal('add-modal')" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition-all shadow-sm"><i data-lucide="x" class="w-4 h-4"></i></button></div><div class="flex-1 overflow-y-auto p-2.5 bg-slate-50 dark:bg-slate-900"><div class="space-y-2.5"><div class="bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm"><label class="block text-[10px] font-bold text-slate-700 dark:text-slate-300 mb-1.5">صور وفيديوهات العقار (بحد أقصى 10)</label><div class="grid grid-cols-4 gap-1.5"><label class="aspect-square border-2 border-dashed border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-slate-900 rounded-lg flex flex-col items-center justify-center cursor-pointer transition-all text-emerald-600 dark:text-emerald-400 relative overflow-hidden"><input type="file" id="file-upload-input" multiple accept="image/*,video/*" onchange="handleUpload(this)" class="absolute inset-0 opacity-0 z-10"><i data-lucide="camera" class="w-4 h-4 mb-0.5"></i><span class="text-[8px] font-bold">إضافة</span></label><div id="preview-area" class="col-span-3 flex gap-1.5 overflow-x-auto no-scrollbar py-0.5"></div></div></div><div class="bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-1.5"><h4 class="text-[9px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-slate-700 pb-0.5 mb-0.5">بيانات أساسية</h4><div class="flex gap-1.5"><div class="custom-select-wrapper flex-1"><select id="in-category" onchange="updateFormFields()" class="custom-select"><option value="apartment">شقة</option><option value="villa">فيلا</option><option value="chalet">شاليهات</option><option value="office">مكتب</option><option value="shop">محلات</option><option value="land">أراضي</option><option value="building">عماير</option><option value="warehouse">مخازن</option></select><i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i></div><div class="custom-select-wrapper w-20 shrink-0"><select id="in-type" class="custom-select"><option value="sale">بيع</option><option value="rent">إيجار</option></select><i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i></div></div><input id="in-title" class="input-box" placeholder="عنوان الإعلان"><input id="in-price" type="number" class="input-box" placeholder="السعر (جنيه)"><div class="grid grid-cols-2 gap-1.5"><input id="in-area" type="number" class="input-box" placeholder="المساحة (م²)"><input id="in-level" type="text" class="input-box" placeholder="الدور"><input id="in-floors-alt" type="number" class="input-box hidden" placeholder="عدد الأدوار"><div id="land-type-wrapper" class="hidden custom-select-wrapper"><select id="in-land-type" class="custom-select"><option value="building">مباني</option><option value="agriculture">زراعية</option></select><i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i></div></div><div id="land-fields" class="hidden grid grid-cols-2 gap-1.5"><input id="in-feddan" type="number" class="input-box" placeholder="فدان (اختياري)"><input id="in-qirat" type="number" class="input-box" placeholder="قيراط (اختياري)"></div><div id="building-fields" class="hidden grid grid-cols-2 gap-1.5"><input id="in-apartments" type="number" class="input-box" placeholder="عدد الشقق"></div><div id="room-fields" class="grid grid-cols-2 gap-1.5"><input id="in-rooms" type="number" class="input-box" placeholder="عدد الغرف"><input id="in-baths" type="number" class="input-box" placeholder="عدد الحمامات"></div><div id="extra-fields" class="grid grid-cols-2 gap-1.5"><input id="in-balconies" type="number" class="input-box" placeholder="عدد البلكونات"><div class="custom-select-wrapper"><select id="in-finishing" class="custom-select"><option value="" disabled selected>نوع التشطيب</option><option value="red">طوب أحمر</option><option value="semi">نصف تشطيب</option><option value="full">تشطيب كامل</option><option value="super">سوبر لوكس</option><option value="ultra">الترا سوبر لوكس</option></select><i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i></div></div><div id="furnished-field" class="flex items-center justify-between bg-slate-50 dark:bg-slate-900 p-1.5 rounded-lg border border-slate-200 dark:border-slate-700"><span class="text-[10px] font-bold text-slate-600 dark:text-slate-300">مفروش؟</span><div class="flex gap-1.5"><label class="cursor-pointer"><input type="radio" name="furnished" id="furn-yes" value="yes" class="peer hidden"><span class="px-3 py-1 rounded text-[9px] font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 peer-checked:bg-emerald-500 peer-checked:text-white peer-checked:border-emerald-500 transition-all shadow-sm">نعم</span></label><label class="cursor-pointer"><input type="radio" name="furnished" id="furn-no" value="no" checked class="peer hidden"><span class="px-3 py-1 rounded text-[9px] font-bold bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 peer-checked:bg-slate-800 peer-checked:text-white peer-checked:border-slate-800 transition-all shadow-sm">لا</span></label></div></div></div><div class="bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-1.5"><h4 class="text-[9px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-slate-700 pb-0.5 mb-0.5">المميزات</h4><div class="grid grid-cols-4 gap-1.5" id="amenities-grid"></div><textarea id="in-desc" rows="2" class="input-box resize-none" placeholder="وصف تفصيلي..."></textarea></div><div class="bg-white dark:bg-slate-800 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-1.5"><h4 class="text-[9px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100 dark:border-slate-700 pb-0.5 mb-0.5">الموقع والتواصل</h4><input id="in-address" class="input-box mb-1.5" placeholder="العنوان بالتفصيل (اسم الشارع، علامة مميزة)..."><div class="grid grid-cols-2 gap-1.5"><div class="custom-select-wrapper"><select id="in-gov" onchange="populateCities('in-gov', 'in-city')" class="custom-select"><option value="" disabled selected>المحافظة</option></select><i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i></div><div class="custom-select-wrapper"><select id="in-city" class="custom-select"><option value="" disabled selected>المركز/المدينة</option></select><i data-lucide="chevron-down" class="custom-select-icon w-3 h-3"></i></div></div><input id="in-map" class="input-box" placeholder="رابط جوجل ماب (اختياري)"><input id="in-phone" type="tel" class="input-box" placeholder="رقم الهاتف"></div></div></div><div class="p-2.5 border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 shrink-0 pb-6 md:pb-3"><button onclick="submitListing()" id="btn-publish" class="w-full bg-slate-800 dark:bg-emerald-600 text-white py-3 rounded-xl font-bold text-xs shadow-lg transition-all transform active:scale-95 border dark:border-emerald-500">نشر الإعلان</button></div></div></div>
+        <!-- قائمة الإعلانات المدمجة -->
+        <div id="listings-container" class="space-y-2"></div>
+        <div id="empty-msg" class="hidden text-center py-10 text-slate-400 text-xs font-bold">لا توجد إعلانات مطابقة</div>
 
-        <!-- Details Modal with Controls -->
-        <div id="details-modal" class="hidden modal-overlay"><div class="mobile-full-modal animate-pop"><div class="relative h-52 bg-slate-200 dark:bg-slate-900 shrink-0 border-b border-slate-200 dark:border-slate-700"><button onclick="closeDetails(false)" class="absolute top-2 left-2 bg-red-500 text-white p-2 rounded-full z-20 shadow-lg hover:bg-red-600 transition-all"><i data-lucide="x" class="w-5 h-5"></i></button><div id="details-slider" class="flex w-full h-full overflow-x-auto no-scrollbar snap-x scroll-smooth"></div><div id="details-arrows"><button onclick="scrollDetails(-1)" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/70 transition-all"><i data-lucide="chevron-right" class="w-5 h-5"></i></button><button onclick="scrollDetails(1)" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10 hover:bg-black/70 transition-all"><i data-lucide="chevron-left" class="w-5 h-5"></i></button></div><span id="d-type-badge" class="absolute bottom-2 right-2 text-white px-3 py-1 rounded-lg text-[10px] font-black shadow-lg"></span></div><div class="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-900"><div id="d-controls" class="p-2 bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 w-full"></div><div class="p-3 space-y-3"><div class="space-y-1.5"><div><span class="text-[10px] font-bold text-slate-500 block mb-0.5">العنوان العقاري</span><h2 id="d-title" class="text-[15px] font-black text-slate-900 dark:text-white leading-tight"></h2></div><div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-2 pt-1"><div><span class="text-[9px] font-bold text-slate-500 block mb-0">السعر المطلوب</span><span id="d-price" class="text-emerald-600 dark:text-emerald-400 font-black text-xl"></span></div><span id="d-time-badge" class="text-[9px] text-slate-700 dark:text-slate-300 font-bold bg-white dark:bg-slate-800 px-2.5 py-1.5 rounded border border-slate-200 dark:border-slate-700 shadow-sm"></span></div></div><div class="border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-sm"><table class="w-full text-[11px] modern-table"><tbody id="d-table-body"></tbody></table></div><div><h3 class="text-[12px] font-black text-slate-800 dark:text-white mb-2 flex items-center gap-1"><i data-lucide="sparkles" class="w-4 h-4 text-yellow-500"></i> المميزات الإضافية</h3><div id="d-amenities" class="grid grid-cols-3 gap-0 border border-slate-200 dark:border-slate-700 rounded-xl overflow-hidden bg-white dark:bg-slate-800 shadow-sm"></div></div><div class="bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm"><h3 class="text-[11px] font-black text-emerald-600 dark:text-emerald-400 uppercase mb-1.5 flex items-center gap-1"><i data-lucide="info" class="w-3.5 h-3.5"></i> التفاصيل الكاملة</h3><p id="d-desc" class="text-[12px] text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-wrap font-medium"></p></div></div></div></div></div>
+    </main>
 
-        <!-- Admin Chat Panel -->
-        <div id="admin-panel" class="hidden fixed inset-0 bg-slate-900 z-[9999] flex flex-col text-white"><div class="p-3 border-b border-white/10 flex justify-between items-center bg-[#020617]"><h2 class="font-bold flex items-center gap-2 text-sm"><i data-lucide="shield" class="w-4 h-4 text-emerald-400"></i> رسائل العملاء</h2><div class="flex gap-3"><button onclick="refreshAdmin()"><i data-lucide="refresh-cw" class="w-4 h-4"></i></button><button onclick="toggleAdminPanel()"><i data-lucide="x" class="w-5 h-5"></i></button></div></div><div class="flex-1 flex overflow-hidden"><div class="w-1/3 border-l border-white/10 bg-[#0f172a] overflow-y-auto p-2" id="admin-users-list"></div><div class="w-2/3 flex flex-col bg-slate-900 relative"><div id="admin-chat-header" class="h-10 border-b border-white/10 flex items-center justify-between px-3 bg-[#020617]"><span class="text-xs font-bold">اختر محادثة</span><button onclick="kickUser()" id="btn-end-chat" class="hidden bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1"><i data-lucide="slash" class="w-3 h-3"></i> إنهاء</button></div><div id="admin-msg-area" class="flex-1 p-3 overflow-y-auto space-y-2 text-xs"></div><div class="p-2 border-t border-white/10 flex gap-2 bg-[#020617]"><input id="admin-input" class="flex-1 bg-white/5 border border-white/20 rounded px-3 py-1.5 text-xs text-white outline-none" placeholder="الرد..."><button onclick="sendAdminMsg()" class="bg-blue-600 px-4 py-1.5 rounded text-xs font-bold">إرسال</button></div></div></div></div>
-        
-        <div id="lightbox" class="hidden fixed inset-0 bg-black/95 z-[120] flex flex-col items-center justify-center select-none"><button onclick="closeLightbox()" class="absolute top-4 left-4 bg-white/20 text-white p-2.5 rounded-full z-20"><i data-lucide="x" class="w-6 h-6"></i></button><button onclick="changeLightboxImage(-1)" class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 text-white p-3 rounded-full z-20"><i data-lucide="chevron-right" class="w-6 h-6"></i></button><button onclick="changeLightboxImage(1)" class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 text-white p-3 rounded-full z-20"><i data-lucide="chevron-left" class="w-6 h-6"></i></button><div class="relative w-full h-full flex items-center justify-center"><img id="lightbox-img" src="" class="max-w-full max-h-[85vh] object-contain transition-opacity duration-100"></div></div>
+    <!-- شاشة تسجيل الدخول -->
+    <div id="auth-modal" class="auth-overlay">
+        <div class="w-full max-w-xs mx-auto bg-slate-800 rounded-2xl shadow-xl border border-slate-700 p-6">
+            <div class="flex justify-center mb-4"><div class="w-12 h-12 bg-slate-900 rounded-full flex items-center justify-center border border-emerald-500 shadow-lg"><i data-lucide="shield" class="w-6 h-6 text-emerald-500"></i></div></div>
+            <h2 class="text-center text-white font-bold text-sm mb-4">تسجيل دخول الإدارة</h2>
+            <div class="space-y-3">
+                <input id="login-email" type="email" class="input-box text-left !text-xs" placeholder="البريد الإلكتروني للإدارة" dir="ltr">
+                <input id="login-pass" type="password" class="input-box text-left !text-xs" placeholder="كلمة المرور" dir="ltr">
+                <button id="btn-login" onclick="loginAdmin()" class="w-full bg-emerald-600 text-white py-2 rounded-xl font-bold text-xs shadow-md hover:bg-emerald-700 mt-2">دخول</button>
+            </div>
+        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, collection, query, where, serverTimestamp, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, addDoc, updateDoc, deleteDoc, onSnapshot, collection, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         const firebaseConfig = { apiKey: "AIzaSyC7zHuH8LK-yQAKG-Nm7dh31fXtVLxuCLM", authDomain: "sharqia-81030.firebaseapp.com", projectId: "sharqia-81030", storageBucket: "sharqia-81030.firebasestorage.app", messagingSenderId: "581888625195", appId: "1:581888625195:web:1667ba1e439e8e6c1fb86e" };
         const app = initializeApp(firebaseConfig); const db = getFirestore(app); const auth = getAuth(app);
         const COLLECTION_NAME = "listings_v2"; 
+        const ADMIN_UID = "ebbvRbE3JTh5MIvzvfX855rY3Qx2";
 
-        let state = { user: null, listings:[], filesToUpload:[], editingId: null, existingImages:[], activeAdminChat: null, activeDetailsId: null, currentDetailIndex: 0 };
-        let reviewsData =[];
-        
+        let state = { user: null, listings:[], filesToUpload:[], editingId: null, existingImages:[] };
+        window.activeFilterCat = ''; 
+        window.openRowId = null; // لحفظ الإعلان المفتوح حتى لا يغلق عند التحديث
+
         const ALL_AMENITIES =["غاز طبيعي", "كهرباء", "مياه", "أسانسير", "واي فاي", "حمام سباحة", "حديقة", "جراج", "أمن وحراسة", "كاميرات مراقبة", "مطبخ أمريكاني", "غرفة خادمة", "مسموح بالحيوانات", "على ناصية"];
         const LAND_AMENITIES =["كهرباء", "مياه", "غاز طبيعي", "على ناصية"];
-        const CAT_MAP = { 'apartment': 'شقق', 'villa': 'فلل', 'chalet': 'شاليهات', 'office': 'مكاتب', 'shop': 'محلات', 'land': 'أراضي', 'building': 'عماير', 'warehouse': 'مخازن' };
-        const CAT_KEYWORDS = { 'شقة': 'apartment', 'شقق': 'apartment', 'فيلا': 'villa', 'فلل': 'villa', 'شالية': 'chalet', 'شاليهات': 'chalet', 'مكتب': 'office', 'مكاتب': 'office', 'محل': 'shop', 'محلات': 'shop', 'ارض': 'land', 'اراضي': 'land', 'عمارة': 'building', 'عماير': 'building', 'مخزن': 'warehouse', 'مخازن': 'warehouse' };
-
-        const CATEGORIES_DATA =[ { id: 'apartment', name: 'شقق', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/q_auto,f_auto/v1775746113/lzoehnfgku9ko8vbw39z.jpg' }, { id: 'villa', name: 'فلل', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/q_auto,f_auto/v1775746137/d9p6okpomqgevtgqmo1p.jpg' }, { id: 'chalet', name: 'شاليهات', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/q_auto,f_auto/v1775746118/m95cxoqje3hbe7tgkmpo.jpg' }, { id: 'office', name: 'مكاتب', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/q_auto,f_auto/v1775746108/utxz8aplwansv5vwlmcf.jpg' }, { id: 'shop', name: 'محلات', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/w_620,q_50,f_auto/v1775746258/fvjhbroovl3w5bb6eusu.jpg' }, { id: 'land', name: 'أراضي', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/q_auto,f_auto/v1775746133/kziznar5rqmfkoosinqp.jpg' }, { id: 'building', name: 'عماير', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/q_auto,f_auto/v1775746127/e1c2gwbzxmz3cu6ivvpw.jpg' }, { id: 'warehouse', name: 'مخازن', img: 'https://res.cloudinary.com/db9h7zm1h/image/upload/q_auto,f_auto/v1775746140/uoexycgeqkuvczxujq79.jpg' } ];
         const EGYPT_LOCATIONS = { "الشرقية":["الزقازيق", "العاشر من رمضان", "منيا القمح", "بلبيس", "مشتول السوق", "القنايات", "أبو حماد", "القرين", "ههيا", "أبو كبير", "فاقوس", "الصالحية الجديدة", "الإبراهيمية", "ديرب نجم", "كفر صقر", "أولاد صقر", "الحسينية", "صان الحجر", "منشأة أبو عمر"], "القاهرة":["مدينة نصر", "مصر الجديدة", "المعادي", "التجمع الخامس", "الرحاب", "مدينتي", "الشروق", "العبور", "المقطم", "الزيتون", "حدائق القبة", "شبرا", "وسط البلد", "المنيل", "الزمالك", "المهندسين", "الدقي", "العجوزة"], "الجيزة":["6 أكتوبر", "الشيخ زايد", "الهرم", "فيصل", "المهندسين", "الدقي", "العجوزة", "إمبابة", "الوراق", "بولاق الدكرور", "العمرانية", "المنيب"] };
-
-        function renderCategories() { document.getElementById('categories-grid').innerHTML = CATEGORIES_DATA.map(c => `<div onclick="openCategory('${c.id}', '${c.name}')" class="relative h-24 rounded-xl overflow-hidden cursor-pointer bg-slate-300 dark:bg-slate-800 shadow-sm border border-slate-200 dark:border-slate-700"><img src="${c.img}" class="absolute inset-0 w-full h-full object-cover"><div class="absolute inset-0 bg-black/40"></div><div class="absolute inset-0 flex items-center justify-center"><span class="text-white font-black text-sm tracking-wider">${c.name}</span></div></div>`).join(''); }
-        window.openHome = () => { document.getElementById('home-view').classList.remove('hidden'); document.getElementById('listings-view').classList.add('hidden'); };
-        window.openCategory = (catId, catName) => { document.getElementById('home-view').classList.add('hidden'); document.getElementById('listings-view').classList.remove('hidden'); document.getElementById('listings-view-title').innerText = catName; document.getElementById('search-input').value = ''; performSearch(catId); };
 
         onAuthStateChanged(auth, async (u) => { 
             if(u && !u.isAnonymous) { 
-                state.user = u; document.getElementById('admin-body').classList.remove('hidden'); document.getElementById('auth-modal').classList.add('hidden');
-                loadListings(); loadReviews(); renderAmenities(ALL_AMENITIES); initLocations();
+                if(u.uid === ADMIN_UID) {
+                    state.user = u; document.getElementById('admin-body').classList.remove('hidden'); document.getElementById('auth-modal').classList.add('hidden');
+                    loadListings(); renderAmenities(ALL_AMENITIES); initLocations();
+                } else {
+                    await signOut(auth); showToast('غير مصرح لك بالدخول', 'e');
+                    document.getElementById('admin-body').classList.remove('hidden'); document.getElementById('auth-modal').classList.remove('hidden');
+                }
             } else { 
                 document.getElementById('admin-body').classList.remove('hidden'); document.getElementById('auth-modal').classList.remove('hidden');
             } 
         });
 
         window.loginAdmin = async () => { 
-            const p=document.getElementById('login-phone').value, w=document.getElementById('login-pass').value; if(!p||!w) return showToast('بيانات ناقصة','e');
+            const e=document.getElementById('login-email').value, w=document.getElementById('login-pass').value; if(!e||!w) return showToast('بيانات ناقصة','e');
             const btn=document.getElementById('btn-login'); btn.innerText='جاري الدخول...'; btn.disabled=true;
-            try{ await signInWithEmailAndPassword(auth, `0${p}@souq.com`, w); showToast('تم الدخول للإدارة'); } catch(e){ showToast('البيانات غير صحيحة','e'); } finally{ btn.innerText='تسجيل الدخول'; btn.disabled=false; }
+            try{ 
+                const userCredential = await signInWithEmailAndPassword(auth, e, w); 
+                if(userCredential.user.uid !== ADMIN_UID) { await signOut(auth); throw new Error('Unauthorized'); }
+                showToast('تم الدخول بنجاح'); 
+            } catch(err){ showToast('بيانات خاطئة أو غير مصرح', 'e'); } finally{ btn.innerText='دخول'; btn.disabled=false; }
         };
         window.logoutAdmin = async () => { if(confirm('تسجيل الخروج؟')){ await signOut(auth); window.location.reload(); } };
 
         function initLocations() { const sel = document.getElementById('in-gov'); if(sel) { sel.innerHTML = `<option value="" disabled selected>المحافظة</option>`; Object.keys(EGYPT_LOCATIONS).forEach(gov => { sel.innerHTML += `<option value="${gov}">${gov}</option>`; }); } }
-        window.populateCities = (govId, cityId) => { const gov = document.getElementById(govId).value; const citySel = document.getElementById(cityId); citySel.innerHTML = `<option value="" disabled selected>المركز/المدينة</option>`; if(gov && EGYPT_LOCATIONS[gov]) { EGYPT_LOCATIONS[gov].forEach(city => { citySel.innerHTML += `<option value="${city}">${city}</option>`; }); } };
-        function renderAmenities(list) { document.getElementById('amenities-grid').innerHTML = list.map(a => `<label class="amenity-tile cursor-pointer"><input type="checkbox" class="amenity-check hidden" value="${a}"><div class="text-center py-1.5 border border-slate-300 dark:border-slate-700 rounded-lg text-[9px] font-bold text-slate-600 dark:text-slate-300 transition-all">${a}</div></label>`).join(''); }
-        
+        window.populateCities = (govId, cityId) => { const gov = document.getElementById(govId).value; const citySel = document.getElementById(cityId); citySel.innerHTML = `<option value="" disabled selected>المدينة</option>`; if(gov && EGYPT_LOCATIONS[gov]) { EGYPT_LOCATIONS[gov].forEach(city => { citySel.innerHTML += `<option value="${city}">${city}</option>`; }); } };
+        function renderAmenities(list) { document.getElementById('amenities-grid').innerHTML = list.map(a => `<label class="amenity-tile cursor-pointer"><input type="checkbox" class="amenity-check hidden" value="${a}"><div class="text-center py-1 border border-slate-300 dark:border-slate-700 rounded text-[9px] font-bold text-slate-600 dark:text-slate-300 transition-all">${a}</div></label>`).join(''); }
+
         window.updateFormFields = () => { const cat = document.getElementById('in-category').value; const rF=document.getElementById('room-fields'), fF=document.getElementById('furnished-field'), lI=document.getElementById('in-level'), fA=document.getElementById('in-floors-alt'), lTW=document.getElementById('land-type-wrapper'), lF=document.getElementById('land-fields'), bF=document.getElementById('building-fields'), eF=document.getElementById('extra-fields'); rF.classList.remove('hidden'); fF.classList.remove('hidden'); lI.classList.remove('hidden'); fA.classList.add('hidden'); lTW.classList.add('hidden'); lF.classList.add('hidden'); bF.classList.add('hidden'); eF.classList.remove('hidden'); if(cat==='land') { renderAmenities(LAND_AMENITIES); rF.classList.add('hidden'); fF.classList.add('hidden'); lI.classList.add('hidden'); eF.classList.add('hidden'); lTW.classList.remove('hidden'); lF.classList.remove('hidden'); } else { renderAmenities(ALL_AMENITIES); if (cat === 'building') { rF.classList.add('hidden'); fF.classList.add('hidden'); lI.classList.add('hidden'); fA.classList.remove('hidden'); bF.classList.remove('hidden'); eF.classList.add('hidden'); } else if (['shop','office','warehouse'].includes(cat)) { rF.classList.add('hidden'); eF.classList.add('hidden'); } } };
 
         window.toggleDarkMode = () => { document.documentElement.classList.toggle('dark'); };
-        window.showToast=(m,t='s')=>{const d=document.createElement('div');d.className=`toast fixed top-4 left-1/2 -translate-x-1/2 bg-white dark:bg-slate-800 shadow-xl px-4 py-2 rounded-lg border border-${t==='e'?'red':'emerald'}-500 flex items-center gap-2 text-xs font-bold z-[10000] text-slate-800 dark:text-white`;d.innerHTML=`<i data-lucide="${t==='e'?'alert-circle':'check-circle'}" class="w-4 h-4 text-${t==='e'?'red':'emerald'}-500"></i> ${m}`;document.getElementById('toast-container').appendChild(d);lucide.createIcons({root:d});setTimeout(()=>{d.classList.add('hiding');setTimeout(()=>d.remove(),200)},3000)};
-        function timeAgo(d) { if(!d) return 'الآن'; try { let dateObj; if (d.seconds) dateObj = new Date(d.seconds * 1000); else dateObj = new Date(d); const s = Math.floor((new Date() - dateObj) / 1000); if(s < 60) return 'الآن'; if(s < 3600) return `منذ ${Math.floor(s/60)} د`; if(s < 86400) return `منذ ${Math.floor(s/3600)} س`; return `منذ ${Math.floor(s/86400)} ي`; } catch(e) { return 'الآن'; } }
+        window.showToast=(m,t='s')=>{const d=document.createElement('div');d.className=`toast bg-white dark:bg-slate-800 shadow-xl px-4 py-2 rounded-lg border border-${t==='e'?'red':'emerald'}-500 flex items-center gap-2 text-xs font-bold text-slate-800 dark:text-white`;d.innerHTML=`<i data-lucide="${t==='e'?'alert-circle':'check-circle'}" class="w-4 h-4 text-${t==='e'?'red':'emerald'}-500"></i> ${m}`;document.getElementById('toast-container').appendChild(d);lucide.createIcons({root:d});setTimeout(()=>{d.classList.add('hiding');setTimeout(()=>d.remove(),200)},3000)};
 
-        function loadListings() { onSnapshot(query(collection(db, COLLECTION_NAME)), (snap) => { state.listings =[]; snap.forEach(d => state.listings.push({id:d.id, ...d.data()})); state.listings.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)); performSearch(); }); }
-        window.performSearch = (catId = null) => { 
-            const q = document.getElementById('search-input').value.toLowerCase(); const cont = document.getElementById('grid-container'); 
-            cont.innerHTML = state.listings.filter(i => (!catId || i.category === catId) && (i.title.toLowerCase().includes(q) || (i.shortCode&&i.shortCode.toLowerCase().includes(q)))).map(item => createCard(item)).join(''); lucide.createIcons({ root: cont }); 
+        // التحكم في القوائم المنسدلة (الفلتر والحالة)
+        window.toggleFilterMenu = (e) => {
+            if(e) e.stopPropagation();
+            document.getElementById('filter-dropdown').classList.toggle('show');
+        };
+        window.selectFilter = (val, text) => {
+            window.activeFilterCat = val;
+            document.getElementById('active-filter-text').innerText = text;
+            document.getElementById('filter-dropdown').classList.remove('show');
+            performSearch();
+        };
+        
+        window.toggleStatusMenu = (e, id) => {
+            if(e) e.stopPropagation();
+            // إغلاق أي قائمة حالة أخرى مفتوحة
+            document.querySelectorAll('[id^="status-dropdown-"]').forEach(el => {
+                if(el.id !== `status-dropdown-${id}`) el.classList.remove('show');
+            });
+            document.getElementById(`status-dropdown-${id}`).classList.toggle('show');
         };
 
-        const getOptimizedUrl = (url, isVideo = false, width = 500) => { if (!url || !url.includes('cloudinary.com')) return url || `https://via.placeholder.com/${width}`; const parts = url.split('/upload/'); if (parts.length < 2) return url; let params = `w_${width},h_${width},c_fill,q_auto:eco,f_auto`; if (isVideo) { let cleanUrl = parts[1]; const lastDot = cleanUrl.lastIndexOf('.'); if (lastDot !== -1) cleanUrl = cleanUrl.substring(0, lastDot) + '.jpg'; return `${parts[0]}/upload/${params},so_0/${cleanUrl}`; } return `${parts[0]}/upload/${params}/${parts[1]}`; };
+        window.selectStatus = async (e, id, val, text) => {
+            if(e) e.stopPropagation();
+            document.getElementById(`status-dropdown-${id}`).classList.remove('show');
+            document.getElementById(`status-text-${id}`).innerText = text;
+            await updateStatus(id, val);
+        };
 
-        function createCard(item) {
-            const thumbUrl = getOptimizedUrl(item.images?.[0] || item.image, item.images?.[0]?.includes('.mp4'), 300); 
-            return `<div class="bg-slate-100 dark:bg-slate-800 rounded-xl overflow-hidden shadow border border-emerald-600 flex flex-col h-full cursor-pointer" onclick="openDetails('${item.id}')"><div class="relative w-full h-32 bg-slate-900"><img src="${thumbUrl}" class="w-full h-full object-cover"></div><div class="p-2"><h3 class="font-bold text-[12px] truncate">${item.title}</h3><p class="text-emerald-500 font-bold text-[11px]">${item.price} ج</p><p class="text-[10px] text-slate-500">كود: ${item.shortCode}</p></div></div>`;
+        // إغلاق أي قائمة عند الضغط خارجها
+        document.addEventListener('click', (e) => {
+            const filterDropdown = document.getElementById('filter-dropdown');
+            const filterContainer = document.getElementById('custom-filter-container');
+            if (filterDropdown && filterDropdown.classList.contains('show') && !filterContainer.contains(e.target)) {
+                filterDropdown.classList.remove('show');
+            }
+            
+            document.querySelectorAll('[id^="status-dropdown-"]').forEach(drop => {
+                if (drop.classList.contains('show')) {
+                    const containerId = drop.id.replace('status-dropdown-', 'status-container-');
+                    const container = document.getElementById(containerId);
+                    if (container && !container.contains(e.target)) {
+                        drop.classList.remove('show');
+                    }
+                }
+            });
+        });
+
+        function loadListings() { 
+            onSnapshot(query(collection(db, COLLECTION_NAME)), (snap) => { 
+                state.listings =[]; 
+                snap.forEach(d => state.listings.push({id:d.id, ...d.data()})); 
+                state.listings.sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0)); 
+                
+                const cont = document.getElementById('listings-container');
+                cont.innerHTML = state.listings.map(item => createCompactRow(item)).join(''); 
+                lucide.createIcons({ root: cont }); 
+                
+                performSearch(); 
+
+                // استعادة الإعلان المفتوح (حتى لا ينغلق عند تحديث الحالة)
+                if (window.openRowId) {
+                    const content = document.getElementById(`content-${window.openRowId}`);
+                    const icon = document.getElementById(`icon-${window.openRowId}`);
+                    if (content) {
+                        content.classList.add('open');
+                        const inner = content.querySelector('.accordion-inner');
+                        if(inner) inner.style.overflow = 'visible';
+                        if(icon) icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+            }); 
+        }
+        
+        window.performSearch = () => { 
+            const q = document.getElementById('search-input').value.toLowerCase(); 
+            const rows = document.querySelectorAll('.listing-row');
+            let visibleCount = 0;
+
+            rows.forEach(row => {
+                const searchData = row.getAttribute('data-search');
+                const catData = row.getAttribute('data-category');
+                const matchSearch = searchData.includes(q);
+                const matchCat = !window.activeFilterCat || catData === window.activeFilterCat;
+
+                if (matchSearch && matchCat) {
+                    row.style.display = 'block'; 
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            const emptyMsg = document.getElementById('empty-msg');
+            if(visibleCount === 0) emptyMsg.classList.remove('hidden');
+            else emptyMsg.classList.add('hidden');
+        };
+
+        const getOptimizedUrl = (url, isVideo = false, width = 100) => { if (!url || !url.includes('cloudinary.com')) return url || `https://via.placeholder.com/${width}`; const parts = url.split('/upload/'); if (parts.length < 2) return url; let params = `w_${width},h_${width},c_fill,q_auto:eco,f_auto`; if (isVideo) { let cleanUrl = parts[1]; const lastDot = cleanUrl.lastIndexOf('.'); if (lastDot !== -1) cleanUrl = cleanUrl.substring(0, lastDot) + '.jpg'; return `${parts[0]}/upload/${params},so_0/${cleanUrl}`; } return `${parts[0]}/upload/${params}/${parts[1]}`; };
+
+        function getStatusBadge(status) {
+            if(status === 'sold') return `<span class="bg-red-100 text-red-700 px-1.5 py-0.5 rounded text-[8px] font-bold">مباع</span>`;
+            if(status === 'rented') return `<span class="bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded text-[8px] font-bold">مؤجر</span>`;
+            return `<span class="bg-emerald-100 text-emerald-700 px-1.5 py-0.5 rounded text-[8px] font-bold">متاح</span>`;
         }
 
-        window.openDetails = async (id) => {
-            const item = state.listings.find(i => i.id === id); if(!item) return; state.activeDetailsId = id; state.currentItem = item;
-            document.getElementById('d-title').innerText = item.title; document.getElementById('d-price').innerText = item.price + ' ج'; document.getElementById('d-desc').innerText = item.desc;
-            const slider = document.getElementById('details-slider'); slider.innerHTML = (item.images||[item.image]).map((src, idx) => { const isVid = src.includes('.mp4') || src.includes('.mov'); return isVid ? `<video src="${src}" controls class="w-full h-full object-contain snap-center shrink-0 bg-black"></video>` : `<img src="${getOptimizedUrl(src, false, 800)}" class="w-full h-full object-cover snap-center shrink-0">` }).join('');
+        function createCompactRow(item) {
+            const thumbUrl = getOptimizedUrl(item.images?.[0] || item.image, item.images?.[0]?.includes('.mp4'), 100); 
+            const imagesThumbnails = (item.images ||[item.image]).map(img => `<img src="${getOptimizedUrl(img, img.includes('.mp4'), 60)}" loading="lazy" class="w-8 h-8 rounded object-cover border border-slate-200 dark:border-slate-700">`).join('');
+            const searchString = `${item.title.toLowerCase()} ${item.shortCode || ''}`;
             
-            let controlsHtml = `<div class="grid grid-cols-4 gap-2 w-full bg-white dark:bg-slate-800 p-2 rounded-xl shadow-sm">`;
-            controlsHtml += `<button onclick="del(event,'${item.id}')" class="bg-red-100 text-red-600 py-2 rounded-lg text-[10px] font-bold"><i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i> حذف</button>`;
-            controlsHtml += `<button onclick="editListing('${item.id}')" class="bg-blue-100 text-blue-600 py-2 rounded-lg text-[10px] font-bold"><i data-lucide="edit" class="w-3.5 h-3.5 inline"></i> تعديل</button>`;
-            controlsHtml += `<select onchange="updateStatus(event, '${item.id}', this.value)" class="bg-emerald-100 text-emerald-700 rounded-lg text-[10px] font-bold text-center outline-none"><option value="available" ${item.status==='available'?'selected':''}>متاح</option><option value="sold" ${item.status==='sold'?'selected':''}>مباع</option><option value="rented" ${item.status==='rented'?'selected':''}>مؤجر</option></select>`;
-            controlsHtml += `<button onclick="pin(event,'${item.id}',${item.isPinned})" class="${item.isPinned?'bg-yellow-200 text-yellow-700':'bg-slate-200 text-slate-700'} py-2 rounded-lg text-[10px] font-bold"><i data-lucide="star" class="w-3.5 h-3.5 inline"></i> تثبيت</button>`;
-            controlsHtml += `</div>`;
-            document.getElementById('d-controls').innerHTML = controlsHtml;
-            
-            toggleModal('details-modal'); lucide.createIcons();
+            const statusMap = { 'available': 'متاح', 'sold': 'مباع', 'rented': 'مؤجر' };
+            const currentStatusText = statusMap[item.status] || 'متاح';
+
+            return `
+            <div class="listing-row bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden" data-search="${searchString}" data-category="${item.category}">
+                <!-- Header -->
+                <div class="flex items-center p-2 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors" onclick="toggleRow('${item.id}')">
+                    <img src="${thumbUrl}" loading="lazy" class="w-12 h-12 rounded object-cover ml-2 shrink-0 border border-slate-200 dark:border-slate-700 bg-slate-100">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-1 mb-0.5">
+                            ${item.isPinned ? '<i data-lucide="star" class="w-3 h-3 text-yellow-500 fill-yellow-500 shrink-0"></i>' : ''}
+                            <h3 class="text-[11px] font-bold truncate text-slate-800 dark:text-white">${item.title}</h3>
+                        </div>
+                        <div class="text-[9px] text-slate-500 flex items-center gap-2 font-bold">
+                            <span class="text-emerald-600 dark:text-emerald-400">${item.price} ج</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                            <span>كود: ${item.shortCode}</span>
+                        </div>
+                    </div>
+                    <div class="shrink-0 flex items-center gap-2 mr-2">
+                        ${getStatusBadge(item.status)}
+                        <i data-lucide="chevron-down" id="icon-${item.id}" class="w-4 h-4 text-slate-400 transition-transform duration-200"></i>
+                    </div>
+                </div>
+
+                <!-- Expanded Content -->
+                <div id="content-${item.id}" class="accordion-content bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-700">
+                    <div class="accordion-inner p-2">
+                        <div class="flex gap-1 mb-2 overflow-x-auto no-scrollbar pb-1">${imagesThumbnails}</div>
+                        <p class="text-[10px] text-slate-600 dark:text-slate-400 mb-3 leading-relaxed whitespace-pre-wrap">${item.desc || 'لا يوجد وصف'}</p>
+                        
+                        <!-- أزرار التحكم -->
+                        <div id="actions-${item.id}" class="grid grid-cols-4 gap-1.5">
+                            <button onclick="editListing('${item.id}')" class="bg-blue-100 text-blue-700 py-1.5 rounded text-[9px] font-bold flex items-center justify-center gap-1"><i data-lucide="edit" class="w-3 h-3"></i> تعديل</button>
+                            <button onclick="showInlineDelete('${item.id}')" class="bg-red-100 text-red-700 py-1.5 rounded text-[9px] font-bold flex items-center justify-center gap-1"><i data-lucide="trash-2" class="w-3 h-3"></i> حذف</button>
+                            
+                            <!-- قائمة الحالة المخصصة -->
+                            <div class="relative h-full" id="status-container-${item.id}">
+                                <button onclick="toggleStatusMenu(event, '${item.id}')" class="w-full h-full bg-slate-200 dark:bg-slate-700 rounded text-[9px] font-bold flex items-center justify-center gap-1 text-slate-700 dark:text-slate-300">
+                                    <span id="status-text-${item.id}">${currentStatusText}</span>
+                                    <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                                </button>
+                                <div id="status-dropdown-${item.id}" class="dropdown-menu absolute bottom-full mb-1 right-0 w-full min-w-[70px] bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-50 flex flex-col overflow-hidden" style="transform-origin: bottom;">
+                                    <button onclick="selectStatus(event, '${item.id}', 'available', 'متاح')" class="text-center px-1 py-1.5 text-[9px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700 text-emerald-600 dark:text-emerald-400">متاح</button>
+                                    <button onclick="selectStatus(event, '${item.id}', 'sold', 'مباع')" class="text-center px-1 py-1.5 text-[9px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700 text-red-600 dark:text-red-400">مباع</button>
+                                    <button onclick="selectStatus(event, '${item.id}', 'rented', 'مؤجر')" class="text-center px-1 py-1.5 text-[9px] font-bold hover:bg-slate-50 dark:hover:bg-slate-700 text-blue-600 dark:text-blue-400">مؤجر</button>
+                                </div>
+                            </div>
+
+                            <button onclick="pinListing('${item.id}', ${item.isPinned})" class="${item.isPinned?'bg-yellow-200 text-yellow-700':'bg-slate-200 text-slate-700 dark:bg-slate-700 dark:text-slate-300'} py-1.5 rounded text-[9px] font-bold flex items-center justify-center gap-1"><i data-lucide="star" class="w-3 h-3"></i> تثبيت</button>
+                        </div>
+
+                        <!-- تأكيد الحذف المدمج -->
+                        <div id="confirm-delete-${item.id}" class="hidden bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 p-2 rounded flex items-center justify-between mt-1">
+                            <span class="text-[10px] font-bold text-red-600 dark:text-red-400">تأكيد الحذف نهائياً؟</span>
+                            <div class="flex gap-1">
+                                <button onclick="confirmDelete('${item.id}')" class="bg-red-500 text-white px-3 py-1 rounded text-[9px] font-bold">نعم</button>
+                                <button onclick="cancelInlineDelete('${item.id}')" class="bg-slate-200 text-slate-700 px-3 py-1 rounded text-[9px] font-bold">إلغاء</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
         }
-        window.closeDetails = () => { toggleModal('details-modal'); state.activeDetailsId = null; }
 
-        window.toggleModal = (id) => { const m = document.getElementById(id); m.classList.toggle('hidden'); return !m.classList.contains('hidden'); }
-        
-        function resetAddForm() { state.filesToUpload =[]; state.editingId = null; state.existingImages =[]; document.getElementById('preview-area').innerHTML = ''; document.getElementById('file-upload-input').value = ''; document.getElementById('in-title').value = ''; document.getElementById('in-price').value = ''; document.getElementById('in-area').value = ''; document.getElementById('in-desc').value = ''; document.getElementById('in-address').value = ''; document.querySelectorAll('.amenity-check').forEach(c => c.checked = false); document.getElementById('btn-publish').innerText = 'نشر الإعلان'; }
-        window.openAddModal = () => { resetAddForm(); updateFormFields(); toggleModal('add-modal'); };
-        
-        window.editListing = (id) => { const item = state.listings.find(i => i.id === id); if(!item) return; state.editingId = id; state.existingImages = item.images; closeDetails(); document.getElementById('add-modal-title').innerText = 'تعديل العقار'; document.getElementById('btn-publish').innerText = 'حفظ التعديلات'; document.getElementById('in-category').value = item.category; updateFormFields(); document.getElementById('in-type').value = item.type; document.getElementById('in-title').value = item.title; document.getElementById('in-price').value = item.price; document.getElementById('in-area').value = item.area || ''; document.getElementById('in-gov').value = item.gov; populateCities('in-gov', 'in-city'); setTimeout(() => document.getElementById('in-city').value = item.city, 100); document.getElementById('in-address').value = item.address || ''; document.getElementById('in-desc').value = item.desc || ''; document.getElementById('preview-area').innerHTML = `<div class="text-[9px] p-2">الصور محفوظة. لتغييرها قم برفع صور جديدة وسيتم مسح القديمة.</div>`; toggleModal('add-modal'); };
+        window.toggleRow = (id) => {
+            const content = document.getElementById(`content-${id}`);
+            const inner = content.querySelector('.accordion-inner');
+            const icon = document.getElementById(`icon-${id}`);
+            
+            if(content.classList.contains('open')) {
+                content.classList.remove('open');
+                inner.style.overflow = 'hidden';
+                icon.style.transform = 'rotate(0deg)';
+                cancelInlineDelete(id); 
+                window.openRowId = null;
+                
+                const drop = document.getElementById(`status-dropdown-${id}`);
+                if(drop) drop.classList.remove('show');
+            } else {
+                document.querySelectorAll('.accordion-content.open').forEach(el => {
+                    if(el.id !== 'inline-form-container') {
+                        el.classList.remove('open');
+                        const elInner = el.querySelector('.accordion-inner');
+                        if(elInner) elInner.style.overflow = 'hidden';
+                        const otherIcon = document.getElementById(`icon-${el.id.replace('content-','')}`);
+                        if(otherIcon) otherIcon.style.transform = 'rotate(0deg)';
+                    }
+                });
+                content.classList.add('open');
+                icon.style.transform = 'rotate(180deg)';
+                window.openRowId = id;
+                // السماح بظهور القائمة المنسدلة خارج حدود العنصر بعد انتهاء الأنيميشن
+                setTimeout(() => { if(content.classList.contains('open')) inner.style.overflow = 'visible'; }, 250);
+            }
+        };
 
-        async function compressImage(file, targetWidth = 1024) { if (file.type.startsWith('video')) return file; return new Promise((resolve) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = (e) => { const img = new Image(); img.src = e.target.result; img.onload = () => { const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); let width = img.width; let height = img.height; if (width > targetWidth) { height *= targetWidth / width; width = targetWidth; } canvas.width = width; canvas.height = height; ctx.drawImage(img, 0, 0, width, height); canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: 'image/jpeg' })), 'image/jpeg', 0.7); }; }; }); }
-        window.handleUpload = async (input) => { if(input.files.length > 10) return showToast('10 ملفات كحد أقصى','e'); state.filesToUpload=[]; for(let f of input.files){ state.filesToUpload.push(await compressImage(f)); } document.getElementById('preview-area').innerHTML = state.filesToUpload.map(f => `<div class="w-12 h-12 bg-emerald-100 rounded flex items-center justify-center text-[8px] font-bold">ملف جاهز</div>`).join(''); };
+        window.showInlineDelete = (id) => {
+            document.getElementById(`actions-${id}`).classList.add('hidden');
+            document.getElementById(`confirm-delete-${id}`).classList.remove('hidden');
+        };
+        window.cancelInlineDelete = (id) => {
+            const actions = document.getElementById(`actions-${id}`);
+            const confirm = document.getElementById(`confirm-delete-${id}`);
+            if(actions) actions.classList.remove('hidden');
+            if(confirm) confirm.classList.add('hidden');
+        };
+
+        window.toggleAddForm = () => {
+            const form = document.getElementById('inline-form-container');
+            if(form.classList.contains('open')) {
+                form.classList.remove('open');
+                resetAddForm();
+            } else {
+                form.classList.add('open');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        };
+
+        function resetAddForm() { 
+            state.filesToUpload =[]; state.editingId = null; state.existingImages =[]; 
+            document.getElementById('preview-area').innerHTML = ''; 
+            document.getElementById('file-upload-input').value = ''; 
+            document.getElementById('in-title').value = ''; 
+            document.getElementById('in-price').value = ''; 
+            document.getElementById('in-area').value = ''; 
+            document.getElementById('in-desc').value = ''; 
+            document.getElementById('in-address').value = ''; 
+            document.querySelectorAll('.amenity-check').forEach(c => c.checked = false); 
+            document.getElementById('btn-publish').innerText = 'حفظ الإعلان'; 
+            document.getElementById('form-title').innerHTML = '<i data-lucide="plus-circle" class="w-4 h-4"></i> إضافة إعلان جديد';
+            lucide.createIcons();
+        }
+
+        window.editListing = (id) => { 
+            const item = state.listings.find(i => i.id === id); if(!item) return; 
+            
+            const form = document.getElementById('inline-form-container');
+            if(!form.classList.contains('open')) form.classList.add('open');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            state.editingId = id; state.existingImages = item.images; 
+            document.getElementById('form-title').innerHTML = '<i data-lucide="edit-3" class="w-4 h-4"></i> تعديل الإعلان'; 
+            document.getElementById('btn-publish').innerText = 'حفظ التعديلات'; 
+            
+            document.getElementById('in-category').value = item.category; updateFormFields(); 
+            document.getElementById('in-type').value = item.type; 
+            document.getElementById('in-title').value = item.title; 
+            document.getElementById('in-price').value = item.price; 
+            document.getElementById('in-area').value = item.area || ''; 
+            document.getElementById('in-gov').value = item.gov; populateCities('in-gov', 'in-city'); 
+            setTimeout(() => document.getElementById('in-city').value = item.city, 100); 
+            document.getElementById('in-address').value = item.address || ''; 
+            document.getElementById('in-desc').value = item.desc || ''; 
+            document.getElementById('preview-area').innerHTML = `<div class="text-[9px] p-2 text-slate-500 font-bold bg-slate-100 dark:bg-slate-800 rounded">الصور محفوظة. لتبديلها قم برفع صور جديدة.</div>`; 
+            lucide.createIcons();
+        };
+
+        async function compressImage(file, targetWidth = 800) { if (file.type.startsWith('video')) return file; return new Promise((resolve) => { const reader = new FileReader(); reader.readAsDataURL(file); reader.onload = (e) => { const img = new Image(); img.src = e.target.result; img.onload = () => { const canvas = document.createElement('canvas'); const ctx = canvas.getContext('2d'); let width = img.width; let height = img.height; if (width > targetWidth) { height *= targetWidth / width; width = targetWidth; } canvas.width = width; canvas.height = height; ctx.drawImage(img, 0, 0, width, height); canvas.toBlob((blob) => resolve(new File([blob], file.name, { type: 'image/jpeg' })), 'image/jpeg', 0.7); }; }; }); }
+        window.handleUpload = async (input) => { if(input.files.length > 10) return showToast('10 ملفات كحد أقصى','e'); state.filesToUpload=[]; for(let f of input.files){ state.filesToUpload.push(await compressImage(f)); } document.getElementById('preview-area').innerHTML = state.filesToUpload.map(f => `<div class="w-10 h-10 bg-emerald-100 text-emerald-700 rounded flex items-center justify-center text-[8px] font-bold shrink-0">جاهز</div>`).join(''); };
         async function uploadToCloudinary(file) { const formData = new FormData(); formData.append('file', file); formData.append('upload_preset', 'souq_upload'); const res = await fetch('https://api.cloudinary.com/v1_1/db9h7zm1h/auto/upload', { method: 'POST', body: formData }); const data = await res.json(); return data.secure_url; }
 
         window.submitListing = async () => { 
             try { 
-                const gov = document.getElementById('in-gov').value; const city = document.getElementById('in-city').value; if(!gov || !city) return showToast('اختر المحافظة والمركز', 'e'); 
+                const gov = document.getElementById('in-gov').value; const city = document.getElementById('in-city').value; if(!gov || !city) return showToast('اختر المحافظة والمدينة', 'e'); 
                 let uploadedUrls =[]; 
                 if(state.filesToUpload.length > 0) { const btn = document.getElementById('btn-publish'); btn.innerText='جاري الرفع...'; btn.disabled = true; for(let f of state.filesToUpload) uploadedUrls.push(await uploadToCloudinary(f)); } 
                 else if (state.editingId) uploadedUrls = state.existingImages; 
                 else return showToast('مطلوب صورة','e'); 
-                
+
                 document.getElementById('btn-publish').innerText = 'جاري الحفظ...'; 
                 const am =[]; document.querySelectorAll('.amenity-check:checked').forEach(c => am.push(c.value)); 
                 const cat = document.getElementById('in-category').value; 
                 const listingData = { title: document.getElementById('in-title').value, price: Number(document.getElementById('in-price').value), type: document.getElementById('in-type').value, category: cat, area: Number(document.getElementById('in-area').value)||0, gov: gov, city: city, address: document.getElementById('in-address').value, phone: document.getElementById('in-phone').value, desc: document.getElementById('in-desc').value, amenities: am, images: uploadedUrls, image: uploadedUrls[0] }; 
                 if(state.editingId) { await updateDoc(doc(db, COLLECTION_NAME, state.editingId), listingData); showToast('تم التعديل'); } 
                 else { listingData.shortCode = Math.floor(100+Math.random()*900).toString(); listingData.status = 'available'; listingData.isPinned = false; listingData.createdAt = serverTimestamp(); await addDoc(collection(db, COLLECTION_NAME), listingData); showToast('تم النشر'); } 
-                toggleModal('add-modal'); resetAddForm(); 
+                toggleAddForm(); 
             } catch(e) { showToast('حدث خطأ', 'e'); document.getElementById('btn-publish').disabled = false; } 
         };
 
-        let itemToDelete = null; window.del = (e, id) => { if(e) e.stopPropagation(); itemToDelete = id; toggleModal('delete-modal'); };
-        window.confirmDelete = async () => { if(!itemToDelete) return; await deleteDoc(doc(db, COLLECTION_NAME, itemToDelete)); showToast('تم الحذف'); closeDetails(); toggleModal('delete-modal'); };
-        window.pin=async(e,id,s)=>{if(e)e.stopPropagation();await updateDoc(doc(db, COLLECTION_NAME, id),{isPinned:!s});showToast('تم تحديث التثبيت'); closeDetails();};
-        window.updateStatus = async (e, id, newStatus) => { if(e) e.stopPropagation(); await updateDoc(doc(db, COLLECTION_NAME, id), { status: newStatus }); showToast('تم تحديث الحالة'); };
+        window.confirmDelete = async (id) => { await deleteDoc(doc(db, COLLECTION_NAME, id)); showToast('تم الحذف'); };
+        window.pinListing = async (id, currentStatus) => { await updateDoc(doc(db, COLLECTION_NAME, id), {isPinned: !currentStatus}); showToast('تم تحديث التثبيت'); };
+        window.updateStatus = async (id, newStatus) => { await updateDoc(doc(db, COLLECTION_NAME, id), { status: newStatus }); showToast('تم تحديث الحالة'); };
 
-        // إدارة التقييمات
-        function loadReviews() { onSnapshot(query(collection(db, "reviews")), (snap) => { reviewsData =[]; snap.forEach(doc => reviewsData.push({ id: doc.id, ...doc.data() })); reviewsData.sort((a,b) => (b.createdAt?.seconds||0) - (a.createdAt?.seconds||0)); renderAdminReviews(); }); }
-        function renderAdminReviews() { document.getElementById('reviews-container').innerHTML = reviewsData.map(r => `<div class="bg-white p-2 rounded border mb-2 flex justify-between items-center"><div class="text-[10px]"><span class="font-bold text-red-600">${r.userName || 'ضيف'}:</span> ${r.text}</div><button onclick="deleteReview('${r.id}')" class="text-red-500 bg-red-50 p-1.5 rounded"><i data-lucide="trash" class="w-4 h-4"></i></button></div>`).join(''); lucide.createIcons(); }
-        window.deleteReview = async (id) => { if(confirm('تأكيد حذف التقييم؟')) { await deleteDoc(doc(db, "reviews", id)); showToast('تم الحذف'); } };
-
-        // شات الإدارة
-        window.toggleAdminPanel=()=>{document.getElementById('admin-panel').classList.toggle('hidden');if(!document.getElementById('admin-panel').classList.contains('hidden'))refreshAdmin()};
-        window.refreshAdmin=()=>{onSnapshot(query(collection(db,"chats"),where('status','!=','closed')),s=>{const l=document.getElementById('admin-users-list');l.innerHTML='';s.forEach(d=>{const dt=d.data();l.innerHTML+=`<div onclick="loadAdmin('${d.id}','${dt.userName}')" class="p-3 mb-2 bg-white/5 rounded-xl cursor-pointer border border-white/10"><div class="font-bold text-xs text-white flex justify-between"><span>${dt.userName}</span>${dt.status==='waiting'?'<span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>':''}</div></div>`})})};
-        window.loadAdmin=(id,n)=>{state.activeAdminChat=id;document.getElementById('admin-chat-header').innerHTML=`<span class="text-xs font-bold">${n}</span><button onclick="kickUser()" id="btn-end-chat" class="bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded"><i data-lucide="slash" class="w-3 h-3 inline"></i> إنهاء</button>`;onSnapshot(doc(db,"chats",id),s=>{const b=document.getElementById('admin-msg-area');b.innerHTML='';if(!s.exists())return;s.data().messages.forEach(m=>{b.innerHTML+=`<div class="${m.s==='support'?'text-left':'text-right'} mb-2"><span class="inline-block px-3 py-2 rounded-lg text-xs ${m.s==='support'?'bg-emerald-600 text-white':'bg-white/10'}">${m.t}</span></div>`});b.scrollTop=9999})};
-        window.sendAdminMsg=async()=>{const t=document.getElementById('admin-input').value;if(!t||!state.activeAdminChat)return;document.getElementById('admin-input').value='';const s=await getDocs(query(collection(db,"chats"),where('__name__','==',state.activeAdminChat)));const m=s.docs[0].data().messages;m.push({s:'support',t,d:new Date()});await updateDoc(doc(db,"chats",state.activeAdminChat),{messages:m,status:'active'})};
-        window.kickUser=async()=>{if(confirm("إنهاء المحادثة؟")){await updateDoc(doc(db,"chats",state.activeAdminChat),{status:'closed'});document.getElementById('admin-msg-area').innerHTML='';state.activeAdminChat=null}};
-
-        renderCategories(); lucide.createIcons();
+        lucide.createIcons();
     </script>
 </body>
 </html>
